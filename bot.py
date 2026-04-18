@@ -12,8 +12,8 @@ ROLE_NAME  = "RaidPings"         # Exakt wie die Rolle in Discord heißt
 MESSAGE    = "⚔️ Raid-Zeit! Macht euch bereit!"   # Nachricht nach dem Ping
 # ─────────────────────────────────────────
 
-# Alle 48 halben Stunden eines Tages (00:00, 00:30, 01:00, … 23:30)
-PING_TIMES = [time(hour=h, minute=m) for h in range(24) for m in (0, 30)]
+# Alle 72 Zwanzig-Minuten-Intervalle eines Tages (00:00, 00:20, 00:40, 01:00, … 23:40)
+PING_TIMES = [time(hour=h, minute=m) for h in range(24) for m in (0, 20, 40)]
 
 intents = discord.Intents.default()
 client  = discord.Client(intents=intents)
@@ -38,7 +38,7 @@ async def raid_ping():
 @client.event
 async def on_ready():
     print(f"✅ Bot online als: {client.user} (ID: {client.user.id})")
-    print(f"   Pinge alle 30 Minuten in Channel-ID: {CHANNEL_ID}")
+    print(f"   Pinge alle 20 Minuten in Channel-ID: {CHANNEL_ID}")
     if not raid_ping.is_running():
         raid_ping.start()
 
